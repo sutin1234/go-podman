@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  api:
+    image: docker.io/thinnydocker/api:database
+    build: ./
+    ports:
+      - "8000:3000"
+    environment:
+      - APP_NAME=API FROM COMPOSE
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_PASSWORD=P@ssw0rd
+      - DB_DATABASE=arise
+    depends_on:
+      - db
+    restart: on-failure
+
+  db:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      - MARIADB_ROOT_PASSWORD=P@ssw0rd
+      - MARIADB_DATABASE=arise
